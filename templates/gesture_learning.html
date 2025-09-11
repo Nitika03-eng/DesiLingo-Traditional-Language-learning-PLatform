@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gesture Learning</title>
+    <link rel="stylesheet" href="/static/css/gesture.css">
+</head>
+<body>
+    <!-- Gradient Animated Background -->
+    <div class="bg-animation"></div>
+
+    <div class="container">
+        <h2>🖐 Gesture Learning Mode</h2>
+        <p class="subheading">आप किस भाषा में सीखना चाहते हैं: <strong>{{ language.title() }}</strong></p>
+
+        <video id="webcam" autoplay width="400" height="300"></video>
+        <button onclick="captureGesture()">📸 Detect Gesture</button>
+
+        <p><strong>Detected Gesture:</strong> <span id="gestureResult">---</span></p>
+        <p><strong>Translated:</strong> <span id="translatedGesture">---</span></p>
+        <audio id="gestureAudio" controls style="display:none;"></audio>
+    </div>
+
+    <!-- Back to Mode Button -->
+    <div class="back-button-container">
+        <form action="./select_mode.html" method="GET">
+            <button type="submit">🔙 Back to Mode</button>
+        </form>
+    </div>
+
+    <script>
+        const webcam = document.getElementById("webcam");
+
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => { webcam.srcObject = stream; })
+            .catch(error => { alert("Webcam not accessible: " + error); });
+
+        function captureGesture() {
+            const canvas = document.createElement("canvas");
+            canvas.width = 400;
+            canvas.height = 300;
+            const context = canvas.getContext("2d");
+            context.drawImage(webcam, 0, 0, canvas.width, canvas.height);
+
+            const imageData = canvas.toDataURL("image/jpeg");
+
+            fetch("/predict-gesture", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ image: imageData, target_lang: "{{ language }}" })
+            })
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById("gestureResult").innerText = data.detected_gesture;
+                document.getElementById("translatedGesture").innerText = data.translated;
+
+                let audio = document.getElementById("gestureAudio");
+                audio.src = data.audio_url;
+                audio.style.display = "block";
+                audio.play();
+            })
+            .catch(err => {
+                console.error(err);
+                alert("Failed to recognize gesture.");
+            });
+        }
+    </script>
+</body>
+</html>

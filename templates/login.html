@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - DesiLingo</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Animated Background -->
+  <div class="bg-animation"></div>
+
+  <!-- Login Box -->
+  <div class="login-container">
+    <div class="login-card">
+      <h2 class="title">स्वागत है 🙏</h2>
+      <h3 class="subtitle">Welcome Back to DesiLingo</h3>
+      
+      <form action="/login" method="POST">
+        <div class="input-group">
+          <input type="email" name="email" placeholder="📧 Email Address" required>
+        </div>
+        <div class="input-group">
+          <input type="password" name="password" placeholder="🔑 Password" required>
+        </div>
+        <button type="submit" class="btn">Log In</button>
+        <p class="signup-link">New here? <a href="/signup">✨ Create an account</a></p>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,124 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Gradient Animated Background */
+.bg-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; 
+    height: 100%;
+    background: linear-gradient(120deg, #f0cc85, #f9b7b0);
+    background-size: 400% 400%;
+    animation: gradientMove 2s ease infinite;
+    opacity: 0.5; /* Reduced opacity for bg image to make gradient visible */
+    z-index: -2;
+}
+
+/* Background Image */
+body {
+    background: url('https://cdn5.vectorstock.com/i/1000x1000/00/69/decorative-background-with-mandala-design-vector-21570069.jpg') no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Gradient Animation Keyframes */
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Container - Solid color with hover glow */
+.container {
+    position: relative;
+    text-align: center;
+    background-color: #ececf0; /* Solid container color */
+    padding: 50px 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    max-width: 600px;
+    width: 90%;
+    transition: all 0.4s ease;
+}
+
+.container:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 30px rgba(255,111,0,0.6), 0 0 60px rgba(255,69,0,0.5);
+}
+
+/* Headings */
+h2 {
+    font-size: 30px;
+    font-weight: 700;
+    color: #131212;
+    margin-bottom: 8px;
+}
+
+.subheading {
+    font-family: 'Noto Serif Devanagari', serif;
+    font-size: 20px;
+    color: #10100f;
+    margin-bottom: 20px;
+}
+
+/* Selected Language Info */
+.container p {
+    font-size: 16px;
+    color: #0a0a0a;
+    margin-bottom: 25px;
+}
+
+/* Buttons */
+button {
+    display: block;
+    width: 100%;
+    max-width: 280px;
+    margin: 12px auto;
+    padding: 14px;
+    font-size: 17px;
+    font-weight: 600;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    color: #fff;
+    background: linear-gradient(45deg, #ff6f61, #ffb347);
+    box-shadow: 0 5px 15px rgba(255,111,0,0.4);
+    transition: all 0.3s ease;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+button:hover {
+    transform: translateY(-4px) scale(1.07);
+    background: linear-gradient(45deg, #eb202a, #fc2554);
+    box-shadow: 0 0 25px rgba(255,111,0,0.7), 0 0 50px rgba(255,69,0,0.6);
+    filter: brightness(1.2);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+button:focus {
+    outline: none;
+    box-shadow: 0 0 15px rgba(255,87,34,0.5);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 35px 20px;
+    }
+    h2 { font-size: 22px; }
+    .subheading { font-size: 16px; }
+    button { font-size: 16px; padding: 12px; max-width: 90%; }
+}

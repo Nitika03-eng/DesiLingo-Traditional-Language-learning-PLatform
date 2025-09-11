@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DesiLingo - Welcome</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+<body>
+  <!-- Corrected Layer Order -->
+  <div class="bg-overlay"></div>
+  <div class="bg-animation"></div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1 class="hero-heading">Welcome to <span>DesiLingo</span></h1>
+    <p class="tagline">🌸 Speak Desi. Live Bold. Own the Lingo. 🗣🤟</p>
+    <div class="btn-group">
+      <a href="/signup" class="btn">Sign Up</a>
+      <a href="/login" class="btn btn-outline">Login</a>
+      <a href="/roadmap" class="btn btn-outline">Roadmap</a>
+    </div>
+  </section>
+</body>
+</html>

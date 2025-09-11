@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Language - DesiLingo</title>
+    <link rel="stylesheet" href="/static/css/language.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/6.7.0/css/flag-icons.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@600&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated Gradient Background -->
+    <div class="bg-animation"></div>
+
+    <!-- Container -->
+    <div class="container">
+        <img src="/static/images/parrot.png" alt="Logo" class="corner-img">
+        <h2>Select a Language</h2>
+        <p class="subheading">कृपया एक भाषा चुनें</p>
+
+        <div class="language-selector">
+            <button class="language-btn hindi" data-language="hindi"><span class="fi fi-in"></span> Hindi</button>
+            <button class="language-btn telugu" data-language="telugu"><span class="fi fi-in"></span> Telugu</button>
+            <button class="language-btn bengali" data-language="bengali"><span class="fi fi-in"></span> Bengali</button>
+            <button class="language-btn tamil" data-language="tamil"><span class="fi fi-in"></span> Tamil</button>
+            <button class="language-btn odia" data-language="odia"><span class="fi fi-in"></span> Odia</button>
+            <button class="language-btn marathi" data-language="marathi"><span class="fi fi-in"></span> Marathi</button>
+            <button class="language-btn punjabi" data-language="punjabi"><span class="fi fi-in"></span> Punjabi</button>
+            <button class="language-btn gujarati" data-language="gujarati"><span class="fi fi-in"></span> Gujarati</button>
+            <button class="language-btn kannada" data-language="kannada"><span class="fi fi-in"></span> Kannada</button>
+            <button class="language-btn malayalam" data-language="malayalam"><span class="fi fi-in"></span> Malayalam</button>
+        </div>
+
+        <!-- Hidden Form -->
+        <form id="language-form" action="/select-mode" method="POST" style="display: none;">
+            <input type="hidden" name="language" id="language-input">
+        </form>
+    </div>
+
+    <script>
+        document.querySelectorAll('.language-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const selectedLanguage = this.getAttribute('data-language');
+                document.getElementById('language-input').value = selectedLanguage;
+                document.getElementById('language-form').submit();
+            });
+        });
+    </script>
+</body>
+</html>

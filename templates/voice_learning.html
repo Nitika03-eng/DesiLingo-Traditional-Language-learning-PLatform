@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Voice Learning - DesiLingo</title>
+    <link rel="stylesheet" href="/static/css/voice.css">
+</head>
+<body>
+    <!-- Gradient Animation -->
+    <div class="bg-animation"></div>
+
+    <div class="container">
+        <h2>🎤 Voice Learning Mode</h2>
+        <p class="subheading">आप किस भाषा में सीखना चाहते हैं: <strong>{{ language.title() }}</strong></p>
+
+        <button onclick="captureHindiWord()">🎙 Speak Hindi Word</button>
+        
+        <p><strong>You Said:</strong> <span id="hindiResult">---</span></p>
+        <p><strong>Translated:</strong> <span id="translatedWord">---</span></p>
+        <audio id="ttsAudio" controls style="display:none;"></audio>
+
+        <hr>
+
+        <h3>Now Repeat the Word:</h3>
+        <button onclick="listenRepeat()">🎙 Repeat</button>
+        <p><strong>Your Pronunciation:</strong> <span id="userRepeat">---</span></p>
+        <p id="resultMessage"></p>
+    </div>
+
+    <script>
+        let expected = "";
+
+        function captureHindiWord() {
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'hi-IN';
+
+            recognition.onresult = function(event) {
+                const hindiWord = event.results[0][0].transcript;
+                document.getElementById("hindiResult").innerText = hindiWord;
+
+                fetch("/translate", {
+                    method: "POST",
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ hindi_word: hindiWord, target_lang: "{{ language }}" })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    expected = data.translated.toLowerCase();
+                    document.getElementById("translatedWord").innerText = expected;
+
+                    let audio = document.getElementById("ttsAudio");
+                    audio.src = data.audio_url;
+                    audio.style.display = "block";
+                    audio.play();
+                });
+            };
+
+            recognition.start();
+        }
+
+        function listenRepeat() {
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'hi-IN'; 
+
+            recognition.onresult = function(event) {
+                const userWord = event.results[0][0].transcript.toLowerCase();
+                document.getElementById("userRepeat").innerText = userWord;
+
+                if (userWord.includes(expected)) {
+                    document.getElementById("resultMessage").innerHTML = "✅ <strong>Good Job!</strong>";
+                } else {
+                    document.getElementById("resultMessage").innerHTML = "❌ <strong>Try Again!</strong>";
+                }
+            };
+
+            recognition.start();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+/* Fonts & Reset */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+}
+
+/* Animated Gradient Background */
+.bg-animation {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(270deg, #FF6F00, #FFD700, #8B0000, #FF4500);
+  background-size: 800% 800%;
+  animation: bgMove 15s ease infinite;
+  z-index: -1;
+}
+
+@keyframes bgMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Container (center box) */
+.login-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Card */
+.login-card {
+  background: rgba(20, 20, 20, 0.85); /* Dark background for contrast */
+  backdrop-filter: blur(20px);
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+  text-align: center;
+  width: 350px;
+  animation: floatUp 1s ease-out;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.login-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 15px 40px rgba(255, 215, 0, 0.5);
+}
+
+/* Animations */
+@keyframes floatUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Titles */
+.title {
+  font-family: 'Noto Serif Devanagari', serif;
+  color: #FFD700;
+  font-size: 2rem;
+  margin-bottom: 0.3rem;
+}
+.subtitle {
+  color: #f1f1f1;
+  margin-bottom: 1.5rem;
+}
+
+/* Input Fields */
+.input-group {
+  margin-bottom: 1.2rem;
+}
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 2px solid rgba(255,255,255,0.2);
+  font-size: 1rem;
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  transition: all 0.4s ease;
+}
+.input-group input::placeholder {
+  color: #bbb;
+}
+.input-group input:focus {
+  border-color: #FFD700;
+  box-shadow: 0 0 15px #FFD700;
+  outline: none;
+}
+
+/* Button */
+.btn {
+  background: linear-gradient(90deg, #FF6F00, #FFD700, #FF4500);
+  border: none;
+  color: #fff;
+  padding: 14px;
+  width: 100%;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 1px;
+  transition: all 0.4s ease;
+}
+.btn:hover {
+  background: linear-gradient(90deg, #FFD700, #FF4500, #8B0000);
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(255,255,255,0.3);
+}
+
+/* Signup Link */
+.signup-link {
+  margin-top: 1.2rem;
+  font-size: 0.9rem;
+  color: #ddd;
+}
+.signup-link a {
+  color: #FFD700;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+.signup-link a:hover {
+  color: #FF4500;
+}

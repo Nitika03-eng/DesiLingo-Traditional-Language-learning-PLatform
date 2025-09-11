@@ -1,0 +1,142 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Animated Gradient Background */
+.bg-animation {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(-45deg, #e4c5ac, #0776d7, #6746b3, #ff6f00);
+    background-size: 400% 400%;
+    animation: gradientMove 3s linear infinite;
+    opacity: 0.35;
+    z-index: -2;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Body */
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('https://cdn5.vectorstock.com/i/1000x1000/33/99/background-template-with-mandala-designs-vector-28123399.jpg') no-repeat center center/cover;
+    position: relative;
+}
+
+/* Container */
+.container {
+    text-align: center;
+    background-color: rgba(255,255,255,0.95);
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(248, 247, 247, 0.6), 0 0 35px rgba(240, 238, 237, 0.4);
+    width: 90%;
+    max-width: 650px;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.4s ease;
+}
+
+.container:hover {
+    box-shadow: 0 0 35px rgba(239, 220, 206, 0.8), 0 0 45px rgba(220, 210, 207, 0.6);
+}
+
+/* Floating Logo */
+.corner-img {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    animation: floatLogo 4s ease-in-out infinite;
+}
+
+@keyframes floatLogo {
+    0%,100% { transform: translate(-50%,0); }
+    50% { transform: translate(-50%,-15px); }
+}
+
+/* Headings */
+h2 {
+    font-size: 2rem;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.subheading {
+    font-family: 'Noto Serif Devanagari', serif;
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+/* Language Buttons */
+.language-selector {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.language-btn {
+    padding: 14px 20px;
+    width: 140px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+    color: #fff;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+/* Button colors */
+.language-btn.hindi { background: #e53935; }
+.language-btn.telugu { background: #ff9800; color: #333; }
+.language-btn.bengali { background: #2196f3; }
+.language-btn.tamil { background: #4caf50; }
+.language-btn.odia { background: #ffc107; color: #333; }
+.language-btn.marathi { background: #673ab7; }
+.language-btn.punjabi { background: #f44336; }
+.language-btn.gujarati { background: #9c27b0; }
+.language-btn.kannada { background: #00bcd4; }
+.language-btn.malayalam { background: #3f51b5; }
+
+/* Button hover effects with glow */
+.language-btn:hover {
+    transform: translateY(-5px) scale(1.07);
+    box-shadow: 0 0 15px rgba(255,255,255,0.8), 0 0 25px rgba(255,111,0,0.6);
+    filter: brightness(1.15);
+}
+
+/* Flag icons */
+.fi {
+    width: 20px;
+    height: 14px;
+    border-radius: 3px;
+    background-size: cover;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .language-selector { flex-direction: column; gap: 12px; }
+    h2 { font-size: 1.6rem; }
+    .subheading { font-size: 1rem; }
+}

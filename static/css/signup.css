@@ -1,0 +1,181 @@
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@600&display=swap');
+
+:root {
+  --primary: #7b2ff7;
+  --secondary: #f107a3;
+  --accent: #00d4ff;
+  --white: #ffffff;
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+}
+
+/* Background Gradient Animation */
+.bg-animation {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(-45deg, #eb6767, #e74034, #e0840c, #def012);
+  background-size: 400% 400%;
+  animation: gradientMove 15s ease infinite;
+  z-index: -2;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Floating glowing orbs */
+.orb {
+  position: fixed;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--secondary), transparent 70%);
+  top: 20%; left: 10%;
+  filter: blur(80px);
+  animation: float 10s ease-in-out infinite;
+  z-index: -1;
+}
+
+.orb2 {
+  width: 250px; height: 250px;
+  top: 60%; left: 70%;
+  background: radial-gradient(circle, var(--accent), transparent 70%);
+  animation-duration: 12s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-30px) translateX(20px); }
+}
+
+/* Container */
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 20px;
+}
+
+/* Signup card (Glassmorphism) */
+.form-side {
+  background: rgba(4, 2, 7, 0.785);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(210, 13, 13, 0.87);
+  padding: 50px 40px;
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  animation: fadeIn 1.5s ease;
+  border: 2px solid rgba(236, 30, 30, 0.235);
+}
+
+.form-container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Heading */
+h2 {
+  font-size: 32px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 30px;
+  text-shadow: 0 0 15px rgba(241,7,163,0.6);
+}
+
+/* Form fields */
+form input {
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  background: rgba(255,255,255,0.1);
+  color: var(--white);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+form input::placeholder {
+  color: rgba(255,255,255,0.6);
+}
+
+form input:focus {
+  background: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 0 10px var(--accent);
+}
+
+/* Button */
+button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+  background-size: 300% auto;
+  color: var(--white);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+}
+
+button:hover {
+  background-position: right center;
+  transform: scale(1.07);
+  box-shadow: 0 10px 30px rgba(241,7,163,0.6);
+}
+
+/* Login link */
+.login-link {
+  margin-top: 20px;
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+}
+
+.login-link a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.login-link a:hover {
+  color: var(--secondary);
+  text-decoration: underline;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .form-side {
+    padding: 35px 25px;
+  }
+  h2 {
+    font-size: 18px;
+  }
+}

@@ -1,0 +1,114 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Background Layers */
+/* .bg-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: url("../images/roadmap.png") center center no-repeat;
+  background-size: cover;
+  z-index: -2;
+  opacity: 0.25;
+} */
+
+.bg-animation {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: -1;
+  background: linear-gradient(270deg, #ff6f00, #ff4500, #8b0000, #ff6f00);
+  background-size: 800% 800%; /* Bigger size for smooth movement */
+  animation: gradientMove 3s ease infinite; /* faster, smoother */
+  opacity: 0.5; /* slightly visible */
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  25% { background-position: 50% 50%; }
+  50% { background-position: 100% 50%; }
+  75% { background-position: 50% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Hero Section */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  color: #fff;
+  padding: 1rem;
+}
+
+.hero-heading {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: linear-gradient(to right, #c61414, #ff6f00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-heading span {
+  font-family: 'Noto Serif Devanagari', serif;
+  background: linear-gradient(to right, #ff4500, #ff6f00, #8b0000);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.tagline {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 2.5rem;
+  text-shadow: 0 3px 10px rgba(0,0,0,0.6);
+}
+
+/* Roadmap Image */
+.roadmap-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.roadmap-img {
+  width: 80%;
+  max-width: 1100px;
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(255,255,255,0.3);
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.roadmap-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 40px rgba(255, 51, 0, 0.6);
+}
+
+/* Button */
+.btn {
+  padding: 12px 25px;
+  border-radius: 50px;
+  background: linear-gradient(90deg, #ff6f00, #8b0000, #ff4500);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.4s ease;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(255,215,0,0.4);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

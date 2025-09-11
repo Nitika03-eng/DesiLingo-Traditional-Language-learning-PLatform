@@ -1,0 +1,151 @@
+/* Import Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@600&family=Poppins:wght@500;700&display=swap');
+
+:root {
+  --primary: #ff6f00;   /* Saffron */
+  --accent: #8b0000;    /* Maroon */
+  --extra: #ff4500;     /* Orange Red */
+  --white: #ffffff;
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body, html {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Background Image (covers evenly) */
+.bg-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: url("https://img.freepik.com/premium-vector/mandala-background_1159-40947.jpg")
+              center center / cover no-repeat;
+  background-attachment: fixed;
+  z-index: -2; /* lowest */
+}
+
+/* Gradient Animation Layer (sits above image) */
+.bg-animation {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(-45deg,
+              rgba(255,111,0,0.4),
+              rgba(139,0,0,0.4),
+              rgba(255,69,0,0.4));
+  background-size: 300% 300%;
+  animation: gradientMove 3s ease infinite;
+  z-index: -1; /* above image */
+  pointer-events: none; /* doesn’t block clicks */
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Hero Section */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  color: var(--white);
+  animation: fadeIn 2s ease;
+  padding: 1rem;
+  position: relative;
+  z-index: 1; /* keep text above backgrounds */
+}
+
+.hero-heading {
+  font-size: 4.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: linear-gradient(to right, #ffffff, #ff6f00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: slideIn 1.5s ease-out;
+}
+
+.hero-heading span {
+  font-family: 'Noto Serif Devanagari', serif;
+  background: linear-gradient(to right, #ff4500, #ff6f00, #8b0000);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.tagline {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 2.5rem;
+  color: #fdfdfd;
+  text-shadow: 0 3px 10px rgba(0,0,0,0.6);
+  animation: fadeIn 2.5s ease;
+}
+
+/* Buttons */
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 14px 30px;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--white);
+  background: linear-gradient(90deg, var(--primary), var(--accent), var(--extra));
+  background-size: 200% auto;
+  transition: all 0.4s ease;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+.btn:hover {
+  background-position: right center;
+  transform: scale(1.08) translateY(-3px);
+  box-shadow: 0 12px 25px rgba(255,111,0,0.4);
+}
+
+.btn-outline {
+    padding: 14px 30px;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--white);
+  background: linear-gradient(90deg, var(--primary), var(--accent), var(--extra));
+  background-size: 200% auto;
+  transition: all 0.4s ease;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25)
+}
+
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+/* Animations */
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

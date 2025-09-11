@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Mode - DesiLingo</title>
+    <link rel="stylesheet" href="/static/css/mode.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@600&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Gradient Animated Background -->
+    <div class="bg-animation"></div>
+
+    <div class="container">
+        <h2>Choose How You Want to Learn</h2>
+        <p class="subheading">आप कौन सा मोड सीखना चाहते हैं?</p>
+        <p>Language selected: <strong>{{ language.title() }}</strong></p>
+
+        <form action="/start-learning" method="POST">
+            <input type="hidden" name="language" value="{{ language }}">
+            <button type="submit" name="mode" value="voice">🎤 Voice Mode</button>
+            <button type="submit" name="mode" value="gesture">🖐 Gesture Mode</button>
+        </form>
+    </div>
+</body>
+</html>
