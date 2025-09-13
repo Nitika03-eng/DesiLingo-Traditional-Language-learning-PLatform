@@ -6,6 +6,9 @@ import base64
 import io
 from PIL import Image
 import uuid
+import cv2
+import numpy as np
+
 
 app = Flask(__name__)
 translator = Translator()
@@ -95,21 +98,62 @@ def predict_gesture():
     if not image_data:
         return jsonify({"error": "No image provided"}), 400
 
+    # Decode base64 image
     image_data = image_data.split(",")[1]
     image_bytes = base64.b64decode(image_data)
     image = Image.open(io.BytesIO(image_bytes))
+    img = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
 
-    # For demo purposes, random gesture
-    predicted_hindi_word = "नमस्ते"
-    translated = dictionary_translate(predicted_hindi_word, target_lang)
+    # Convert to grayscale + threshold
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    _, thresh = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
 
+    # Find contours
+    contours, _ = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
+    detected_hindi_word = "नमस्ते"  # default
+
+    if contours:
+        cnt = max(contours, key=cv2.contourArea)
+        hull = cv2.convexHull(cnt, returnPoints=False)
+
+        if hull is not None and len(hull) > 3:
+            defects = cv2.convexityDefects(cnt, hull)
+
+            if defects is not None:
+                finger_count = 0
+                for i in range(defects.shape[0]):
+                    s, e, f, d = defects[i, 0]
+                    start = tuple(cnt[s][0])
+                    end = tuple(cnt[e][0])
+                    far = tuple(cnt[f][0])
+                    a = np.linalg.norm(np.array(start) - np.array(end))
+                    b = np.linalg.norm(np.array(start) - np.array(far))
+                    c = np.linalg.norm(np.array(end) - np.array(far))
+                    angle = np.arccos((b**2 + c**2 - a**2) / (2*b*c))
+
+                    if angle <= np.pi/2:
+                        finger_count += 1
+
+                # Map gestures by finger count
+                if finger_count == 0:
+                    detected_hindi_word = "क्या कर रहे हो"
+                elif finger_count == 1:
+                    detected_hindi_word = "कहाँ जा रहे हो"
+                elif finger_count >= 4:
+                    detected_hindi_word = "नमस्ते"
+
+    # Translate
+    translated = dictionary_translate(detected_hindi_word, target_lang)
+
+    # Generate audio
     audio_filename = f"{uuid.uuid4()}.mp3"
     audio_path = os.path.join("static", "audio", audio_filename)
     tts = gTTS(translated, lang=target_lang_code(target_lang))
     tts.save(audio_path)
 
     return jsonify({
-        "hindi_word": predicted_hindi_word,
+        "hindi_word": detected_hindi_word,
         "translated": translated,
         "audio_url": f"/static/audio/{audio_filename}"
     })
